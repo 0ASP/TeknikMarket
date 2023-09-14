@@ -13,6 +13,6 @@ namespace Core.Domain
         public Nullable<DateTime> OlusturmaTarihi { get; set; }
         public Nullable<int> Guncelleyen { get; set; }
         public Nullable<DateTime> GuncellemeTarihi { get; set; }
-        public Nullable<bool> Aktif { get; set; }
+        public bool Aktif { get; set; }
     }
 }

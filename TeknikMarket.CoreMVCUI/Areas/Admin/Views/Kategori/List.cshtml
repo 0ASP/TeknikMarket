@@ -1,68 +1,126 @@
 ﻿@using TeknikMarket.Model.Entity;
 
 @{
-    ViewData["Title"] = "List";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "List";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @model KategoriListeVm
+
+<div class="col-md-12"><a onclick="KategoriModalShow();" class="btn btn-primary">Kategori Ekle</a></div>
+<br />
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Kategori Listesi</h3>
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Kategori Listesi</h3>
+			</div>
+			<!-- /.card-header -->
 
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Arama">
+			<div class="card-body">
 
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>Kategori No</th>
-                            <th>Kategori Görünüm</th>
-                            <th>Kategori Adi</th>
-                            <th>Açıklama</th>
-                            <th>Üst Kategorisi</th>
-                            <th>Aktif/pasif</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @foreach (Kategori item in Model.KategoriListesi)
-                            {
-                                <td>@item.Id</td>
-                                <td>@item.KategoriAdiGorunumu</td>
-                                <td>@item.KategoriAdi</td>
-                                <td>@item.Aciklama</td>
-                                <td>@item.UstKategori.KategoriAdi</td>
+				<div id="buttonContainer"></div>
+				<br />
+				<table id="example2" class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Kategori Adı</th>
+							<th>Kategori Görünüm</th>
+							<th>Aktiflik</th>
+							<th>Sıra</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="tblKategoriler">
 
-                                <td><span class="tag tag-success">Approved</span></td>
-                                <td><a class="btn btn accept-success">Düzenle</a></td>
-                            <td><a class="btn btn accept-danger">Sil</a></td>
+						@foreach (Kategori item in Model.KategoriListesi)
+						{
+							<tr>
+								<td>@item.Id</td>
+								<td>@item.KategoriAdi</td>
+								<td>@item.KategoriAdiGorunumu</td>
+								<td>
 
-                            }
+									@if (item.Aktif)
+									{
+										<input type="checkbox" kategoriid="@item.Id" class="Aktiflik" checked name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+									}
+									else
+									{
+										<input type="checkbox" kategoriid="@item.Id" class="Aktiflik" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+									}
+
+								</td>
+								<td>@item.Sira</td>
+								<td><a kategoriid="@item.Id" class="btn btn-primary btnDuzenle">DÜZENLE</a></td>
+								<td><a kategoriid="@item.Id" class="btn btn-danger btnSil">SİL</a></td>
+							</tr>
+						}
 
 
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
+					</tbody>
+
+				</table>
+			</div>
+			<!-- /.card-body -->
+		</div>
+		<!-- /.card -->
+
+
+	</div>
+	<!-- /.col -->
 </div>
+
+
+@section Script{
+	
+
+
+
+	<script>
+		$(document).on('switchChange.bootstrapSwitch', '.Aktiflik', function (event, state) {
+			var x = $(this).attr("kategoriid");
+
+			var aktiflik = false;
+
+			if ($(this).is(':checked')) {
+				aktiflik = true;
+			}
+
+			$.ajax({
+				url: "/Admin/Kategori/Aktiflik/",
+				method: "post",
+				dataType: "json",
+				data: { KategoriId: x, Aktiflik: aktiflik },
+				success: function (r) {
+
+					if (r.result) {
+						Swal.fire(
+							'Başarılı',
+							r.mesaj,
+							'success'
+						)
+
+
+					}
+
+
+				},
+				error: function () {
+
+
+				}
+
+
+			});
+
+
+
+		});
+				
+	</script>
+
+
+}
