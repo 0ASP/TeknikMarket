@@ -27,13 +27,14 @@ namespace TeknikMarket.CoreMVCUI
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddFluentValidationClientsideAdapters();
 
-            
+			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //builder.Services.AddTransient(); ÝSTEDÝÐÝN KADAR NEWLÝYOR HER TALEPTE NEW ÝÞLEMÝNÝ TEKRAR YAPIYOR
-            //builder.Services.AddScoped();    SADECE 1 SCOPEDA GEÇERLÝ OLUYOR SONRA ÖLÜYOR
-            //builder.Services.AddSingleton(); SADECE 1 KERE KULLANIYOR.TALEP EDÝLDÝÐÝNDE BUNU TEKRAR KULLANIYOR
 
-            builder.Services.AddSingleton<IKullaniciBS, KullaniciBs>();
+			//builder.Services.AddTransient(); ÝSTEDÝÐÝN KADAR NEWLÝYOR HER TALEPTE NEW ÝÞLEMÝNÝ TEKRAR YAPIYOR
+			//builder.Services.AddScoped();    SADECE 1 SCOPEDA GEÇERLÝ OLUYOR SONRA ÖLÜYOR
+			//builder.Services.AddSingleton(); SADECE 1 KERE KULLANIYOR.TALEP EDÝLDÝÐÝNDE BUNU TEKRAR KULLANIYOR
+
+			builder.Services.AddSingleton<IKullaniciBS, KullaniciBs>();
             builder.Services.AddSingleton<IKullaniciRepository, EFKullaniciRepository>();
             builder.Services.AddSingleton<IKategoriBS, KategoriBs>();
             builder.Services.AddSingleton<IKategoriRepository, EFKategoriRepository>();

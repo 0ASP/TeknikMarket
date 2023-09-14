@@ -8,7 +8,7 @@ namespace Core.Domain
 {
     public class AudiTableEntity
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public Nullable<int> Olusturan { get; set; }
         public Nullable<DateTime> OlusturmaTarihi { get; set; }
         public Nullable<int> Guncelleyen { get; set; }
