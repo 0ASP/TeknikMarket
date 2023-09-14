@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "MyAccount";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model MyAccountVm
+
+
+<div class="col-md-3">
+
+    <!-- Profile Image -->
+    <div class="card card-primary card-outline">
+        <div class="card-body box-profile">
+            <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle"
+                     src="/admin/img/user4-128x128.jpg"
+                     alt="User profile picture">
+            </div>
+
+            <h3 class="profile-username text-center">Nina</h3>
+
+            <p class="text-muted text-center">Software Engineer</p>
+
+            
+
+            <a href="#" class="btn btn-primary btn-block"><b>Resim Güncelle</b></a>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.col -->
+<div class="col-md-9">
+    <div class="card">
+        <div class="card-header p-2">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#profil" data-toggle="tab">Profil Bilgilerim</a></li>
+                <li class="nav-item"><a class="nav-link" href="#iletişim" data-toggle="tab">İletişim Bilgilerim</a></li>
+                <li class="nav-item"><a class="nav-link" href="#şifre" data-toggle="tab">Şifre Değiştir</a></li>
+            </ul>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="active tab-pane" id="profil">
+                    <!-- Post -->
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-2 col-form-label">Adınız</label>
+                            <div class="col-sm-10">
+                                <input asp-for=Adi type="text" class="form-control" id="inputName" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label  for="inputEmail" class="col-sm-2 col-form-label">Soyadi</label>
+                            <div class="col-sm-10">
+                                <input asp-for =Soyadi type="text" class="form-control" id="inputEmail" placeholder="Soyadi">
+                            </div>
+                        </div>
+                      
+                    </form>
+                    <!-- /.post -->
+                    <!-- Post -->
+                    
+                    </div>
+                    <!-- /.post -->
+                </div>
+                <!-- /.tab-pane -->
+            
+                <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+        </div><!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+<!-- /.col -->

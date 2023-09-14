@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Teknik Market | Starter</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/admin/css/adminlte.min.css">
+
+    @RenderSection("style",false)
+
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!--Main Header-->
+        @await Component.InvokeAsync("MainHeader")
+        <!--/.Main Header-->
+
+        @await Component.InvokeAsync("SideBar")
+
+        <div class="content-wrapper">
+            @await Component.InvokeAsync("ContentHeader")
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        @RenderBody()
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @{
+            await Html.RenderPartialAsync("~/Areas/Admin/Views/Shared/Partials/_footer.cshtml");
+            //Partials kullanacaksak bu cshtml dosyasına herhangi bir kod yazmayacağımızı ön görmemiz lazım çünkü model kavramı partial metotlarda geçersiz kılınır. Kısaca partial yapacaksak bu footer tagını hiçbir şekilde buraya kod yazmayacağımızı ön görmemiz lazım.
+            //sayfanın yüklendiğine emin olduğunda git async(asekron) metohodu çalıştır.
+        }
+
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/admin/dist/js/adminlte.min.js"></script>
+
+    @RenderSection("Script", required:false)
+</body>
+</html>
